@@ -1,3 +1,5 @@
+ require('./config/config');
+// console.log('mongoose db', mongoose.connections[0].name);
 const _ = require('lodash');
 
 var express = require('express');
@@ -26,6 +28,7 @@ app.post('/todos', (req, res) => {
     res.status(400).send(e);
   })
 });
+
 app.get('/todos/:id', (req, res) => {
   var id = req.params.id;
 
@@ -42,6 +45,7 @@ app.get('/todos/:id', (req, res) => {
     res.status(400).send();
   });
 });
+
 app.listen(port, () => {
   console.log(`Started on port ${port}`);
 });
@@ -70,6 +74,7 @@ app.delete('/todos/:id', (req, res) => {
   });
 
 });
+
 app.patch('/todos/:id', (req, res) => {
   var id = req.params.id;
   var body = _.pick(req.body, ['text', 'completed']);
@@ -95,4 +100,6 @@ app.patch('/todos/:id', (req, res) => {
   })
 })
 
-module.exports = {app};
+module.exports = {
+  app
+};
